@@ -4,22 +4,23 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public float TurnSpeed = 180f;
-    public float Speed = 12f;
-    public string MovementAxisName;
-    public string TurnAxisName;
+    public float speed = 6f;            // The speed that the player will move at.
+    public string HorizontalAxisName;
+    public string VerticalAxisName;
 
     private new Rigidbody rigidbody;
-    private float turnInputValue;
-    private float movementInputValue;
-
+    private float verticalValue;
+    private float horizontalValue;
+    private Vector3 movement;                   // The vector to store the direction of the player's movement.
+    
     private void OnEnable()
     {
         // When the tank is turned on, make sure it's not kinematic.
         rigidbody.isKinematic = false;
 
         // Also reset the input values.
-        movementInputValue = 0f;
-        turnInputValue = 0f;
+        horizontalValue = 0f;
+        verticalValue = 0f;
     }
 
 
@@ -43,30 +44,33 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // Store the value of both input axes.
-        movementInputValue = Input.GetAxis(MovementAxisName);
-        turnInputValue = Input.GetAxis(TurnAxisName);
+        horizontalValue = Input.GetAxis(HorizontalAxisName);
+        verticalValue = Input.GetAxis(VerticalAxisName);
     }
 
     private void FixedUpdate()
     {
         // Adjust the rigidbodies position and orientation in FixedUpdate.
         Move();
-        Turn();
+        //Turn();
     }
     
     private void Move()
     {
-        // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
-        Vector3 movement = transform.forward * movementInputValue * Speed * Time.deltaTime;
+        // Set the movement vector based on the axis input.
+        movement.Set(horizontalValue, 0f, verticalValue);
 
-        // Apply this movement to the rigidbody's position.
-        rigidbody.MovePosition(rigidbody.position + movement);
+        // Normalise the movement vector and make it proportional to the speed per second.
+        movement = movement.normalized * speed * Time.deltaTime;
+
+        // Move the player to it's current position plus the movement.
+        rigidbody.MovePosition(transform.position + movement);
     }
 
     private void Turn()
     {
         // Determine the number of degrees to be turned based on the input, speed and time between frames.
-        float turn = turnInputValue * TurnSpeed * Time.deltaTime;
+        float turn = verticalValue * TurnSpeed * Time.deltaTime;
 
         // Make this into a rotation in the y axis.
         Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
