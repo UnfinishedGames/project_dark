@@ -20,43 +20,19 @@ public class PadBasedController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Store the input axes.
-        float h = Input.GetAxisRaw(playerAxisHorizontal);
-        float v = Input.GetAxisRaw(playerAxisVertical);
-
-        // Move the player around the scene.
-        Move(h, v);
-
-        // Turn the player to face the mouse cursor.
-        Turning();
+        var newDirection = (Vector3.right * Input.GetAxis(playerAxisHorizontal) + Vector3.forward * Input.GetAxis(playerAxisVertical)).normalized;
+        Move(newDirection);
+        Turning(newDirection);
     }
 
-    void Move(float h, float v)
+    void Move(Vector3 newDirection)
     {
-        // Set the movement vector based on the axis input.
-        movement.Set(h, 0f, v);
-
-        // Normalise the movement vector and make it proportional to the speed per second.
-        movement = movement.normalized * speed * Time.deltaTime;
-
-        // Move the player to it's current position plus the movement.
-        playerRigidbody.MovePosition(transform.position + movement);
+        transform.position += newDirection * speed * Time.deltaTime;
     }
 
     // Update is called once per frame
-    void Turning()
+    void Turning(Vector3 newDirection)
     {
-        // We are going to read the input every frame
-        Vector3 vNewInput = new Vector3(Input.GetAxis(LookHorizontal), Input.GetAxis(LookVertical), 0.0f);
-
-        // Only do work if meaningful
-        if (vNewInput.sqrMagnitude < 0.1f)
-        {
-            return;
-        }
-
-        // Apply the transform to the object  
-        var angle = Mathf.Atan2(Input.GetAxis(LookHorizontal), Input.GetAxis(LookVertical)) * Mathf.Rad2Deg;
-        playerRigidbody.MoveRotation(Quaternion.Euler(0, angle, 0));
+        transform.rotation = Quaternion.LookRotation(newDirection);
     }
 }
