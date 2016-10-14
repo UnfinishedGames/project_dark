@@ -10,6 +10,10 @@ public class MouseBasedController : MonoBehaviour
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+    
+    public int pushButton = 0;
+    public Rigidbody weapon;
+    public Transform weaponSlot;
 
     void Awake()
     {
@@ -32,6 +36,7 @@ public class MouseBasedController : MonoBehaviour
 
         // Turn the player to face the mouse cursor.
         Turning();
+        slashOut();
     }
 
     void Move(float h, float v)
@@ -70,5 +75,18 @@ public class MouseBasedController : MonoBehaviour
             playerRigidbody.MoveRotation(newRotation);
         }
     }
+
+    void slashOut()
+    {
+        if (Input.GetMouseButtonDown(pushButton))
+        {
+            //Debug.Log("BAM");
+            Rigidbody weapon_inst;
+            weapon_inst = Instantiate(weapon, weaponSlot.position, weaponSlot.rotation) as Rigidbody;
+            //weapon_inst.AddExplosionForce(3, weaponSlot.position, 3);
+            weapon_inst.AddForce(weaponSlot.forward * 1000);
+        }
+    }
+    
 }
 
