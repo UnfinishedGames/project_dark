@@ -6,8 +6,8 @@ public class PadBasedController : MonoBehaviour
     public string playerAxisHorizontal;
     public string playerAxisVertical;
 
-    public string LookHorizontal;
-    public string LookVertical;
+    public string lookHorizontal;
+    public string lookVertical;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
@@ -20,9 +20,16 @@ public class PadBasedController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var newDirection = (Vector3.right * Input.GetAxis(playerAxisHorizontal) + Vector3.forward * Input.GetAxis(playerAxisVertical)).normalized;
+		var newDirection = (Vector3.right * Input.GetAxis(playerAxisHorizontal) + Vector3.forward * Input.GetAxis(playerAxisVertical)).normalized;    
+		//Debug.logger.Log ("LookHorizontal", Input.GetAxisRaw (lookHorizontal));
+		//Debug.logger.Log ("LookVertical", Input.GetAxisRaw (lookVertical));
+		var newLookingDirection = new Vector3( Input.GetAxis(lookHorizontal), 0.0f, Input.GetAxis(lookVertical));
+		//newLookingDirection.Normalize();
+		if (!newLookingDirection.Equals (Vector3.zero)) 
+		{
+			Turning(newLookingDirection);
+		}
         Move(newDirection);
-        Turning(newDirection);
     }
 
     void Move(Vector3 newDirection)
@@ -33,6 +40,7 @@ public class PadBasedController : MonoBehaviour
     // Update is called once per frame
     void Turning(Vector3 newDirection)
     {
-        transform.rotation = Quaternion.LookRotation(newDirection);
+		//Debug.logger.Log ("new vector", newDirection);
+		transform.rotation = Quaternion.LookRotation(newDirection);
     }
 }
