@@ -25,6 +25,14 @@ public class PadBasedController : MonoBehaviour
         //playerRigidbody = GetComponent<Rigidbody>(); 
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     void FixedUpdate()
     {
         var newDirection = (Vector3.right * Input.GetAxis(playerAxisHorizontal) + Vector3.forward * Input.GetAxis(playerAxisVertical)).normalized;    

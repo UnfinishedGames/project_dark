@@ -24,6 +24,14 @@ public class MouseBasedController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
 
     void FixedUpdate()
     {
