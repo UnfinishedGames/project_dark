@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class StickBehaviour : MonoBehaviour
 {
-    // Use this for initialization
     void Start()
     {
         Destroy(gameObject, 0.2f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
+        PlayerHealth player = targetRigidbody.GetComponent<PlayerHealth>();
+        player.TakeDamage();
     }
 
 }
