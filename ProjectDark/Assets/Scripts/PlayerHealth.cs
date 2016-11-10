@@ -3,23 +3,30 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-
+    public string myName; 
     public float startingHealth = 100;
     public Slider healthBar;
     private float currentHealth;
+    public CountWins counter;
+    public GameObject playerSpawn;
+
+    private void OnEnable()
+    {
+        currentHealth = startingHealth;
+        UpdateHealthBar();
+        transform.position = playerSpawn.transform.position;
+    }
 
     public void TakeDamage()
     {
         currentHealth -= 10;
         UpdateHealthBar();
+        if(currentHealth <= 0)
+        {
+            counter.IAmDead(myName);
+        }
     }
-       
-    private void OnEnable()
-    {
-        currentHealth = startingHealth;
-        UpdateHealthBar();
-    }
-
+     
     private void UpdateHealthBar()
     {
         healthBar.value = currentHealth;
