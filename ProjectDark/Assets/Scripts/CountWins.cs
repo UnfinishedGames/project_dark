@@ -11,6 +11,7 @@ public class CountWins : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
         Player1WinCount.text = "0";
         Player2WinCount.text = "0";
     }

@@ -35,7 +35,7 @@ public class PlayerTextOverlay : MonoBehaviour
         if (Time.time >= switchNext)
         {
             switchNext = Time.time + switchNextGap;
-            var newPosition = new Vector3(Random.Range(-2, 2) + 0.5f, Random.Range(-2, 2) + 0.5f, 0.1f);
+            var newPosition = new Vector3(Random.Range(-2, 2) + 1f, Random.Range(-2, 2) +1f, 0.1f);
             movementOnoma.transform.localPosition = newPosition;
         }
         movementOnoma.transform.rotation = Quaternion.Euler(90, 0, 0);
