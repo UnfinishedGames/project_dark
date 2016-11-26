@@ -24,7 +24,7 @@ public class CameraControl : MonoBehaviour
         Move();
         Zoom();
     }
-    
+
     private void Move()
     {
         FindAveragePosition();
@@ -44,7 +44,7 @@ public class CameraControl : MonoBehaviour
         averagePos.y = transform.position.y;
         desiredPosition = averagePos;
     }
-    
+
     private void Zoom()
     {
         float requiredSize = FindRequiredSize();
@@ -55,7 +55,7 @@ public class CameraControl : MonoBehaviour
     {
         Vector3 desiredLocalPos = transform.InverseTransformPoint(desiredPosition);
         float size = 0f;
-        for(int counter = 0; counter < Targets.Length; counter++)
+        for (int counter = 0; counter < Targets.Length; counter++)
         {
             Vector3 targetLocalPos = transform.InverseTransformPoint(Targets[counter].position);
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
