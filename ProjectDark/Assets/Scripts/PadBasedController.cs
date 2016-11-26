@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Runtime.InteropServices;
 
 public class PadBasedController : MonoBehaviour
 {
@@ -35,37 +36,36 @@ public class PadBasedController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var newDirection = (Vector3.right * Input.GetAxis(playerAxisHorizontal) + Vector3.forward * Input.GetAxis(playerAxisVertical)).normalized;    
-        //Debug.logger.Log ("LookHorizontal", Input.GetAxisRaw (lookHorizontal));
-        //Debug.logger.Log ("LookVertical", Input.GetAxisRaw (lookVertical));
-        var newLookingDirection = new Vector3(Input.GetAxis(lookHorizontal), 0.0f, Input.GetAxis(lookVertical));
-        //newLookingDirection.Normalize();
-        if (!newLookingDirection.Equals(Vector3.zero))
-        {
-            Turning(newLookingDirection);
-        }
-        Move(newDirection);
-
+        Move();
+        Turning();
         slashOut();
     }
 
-    void Move(Vector3 newDirection)
+    void Move()
     { 
+        var horizontalDirection = Vector3.right * Input.GetAxis(playerAxisHorizontal);
+        var verticalDirection = Vector3.forward * Input.GetAxis(playerAxisVertical);
+        //Debug.Log("Direction: " + horizontalDirection.ToString("G4"));
+        //Debug.Log("Input: " + Input.GetAxis(playerAxisHorizontal).ToString());
+        var newDirection = (horizontalDirection + verticalDirection);
         transform.position += newDirection * speed * Time.deltaTime;  
     }
 
-    // Update is called once per frame
-    void Turning(Vector3 newDirection)
+    void Turning()
     {
-        //Debug.logger.Log ("new vector", newDirection);
-        transform.rotation = Quaternion.LookRotation(newDirection);
+        var newLookingDirection = new Vector3(Input.GetAxis(lookHorizontal), 0.0f, Input.GetAxis(lookVertical));
+        if (!newLookingDirection.Equals(Vector3.zero))
+        {
+            //Debug.logger.Log ("new vector", newLookingDirection);
+            transform.rotation = Quaternion.LookRotation(newLookingDirection);
+        }
     }
 
     void slashOut()
     {
         if (Input.GetButtonDown(pushButton))
         {
-            Debug.Log("BAM");
+            //Debug.Log("BAM");
             Rigidbody weapon_inst;
             weapon_inst = Instantiate(weapon, weaponSlot.position, weaponSlot.rotation) as Rigidbody;
             //weapon_inst.AddExplosionForce(3, weaponSlot.position, 3);
