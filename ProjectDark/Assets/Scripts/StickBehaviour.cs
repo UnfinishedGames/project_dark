@@ -10,10 +10,12 @@ public class StickBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody targetRigidbody = other.GetComponent<Rigidbody>();
-        if (targetRigidbody == null)
-            return;
-        PlayerHealth player = targetRigidbody.GetComponent<PlayerHealth>();
-        player.TakeDamage();
+        if (targetRigidbody != null) {
+            PlayerHealth player = targetRigidbody.GetComponent<PlayerHealth>();
+            if (player != null) {
+                player.TakeDamage();
+            }
+        }
     }
 
 }
