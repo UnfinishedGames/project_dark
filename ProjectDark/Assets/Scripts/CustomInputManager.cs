@@ -5,6 +5,8 @@ using System.Collections;
 /// Custom input manager. The stuff you see here is based on
 /// http://plyoung.appspot.com/blog/manipulating-input-manager-in-script.html
 /// 
+/// We might also take a look at http://roidz.weebly.com/ but it looks much more complicated.
+/// 
 /// This file is WORK IN PROGRESS! If it is actually called in a checked-in version, this is by accident.
 /// </summary>
 public class CustomInputManager : MonoBehaviour
