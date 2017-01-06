@@ -9,14 +9,14 @@ public class CameraControl : MonoBehaviour
     public float MinSize = 6.5f;
     public Transform[] Targets;
 
-    private Camera camera;
+    private Camera currentCamera;
     private float zoomSpeed;
     private Vector3 moveVelocity;
     private Vector3 desiredPosition;
 
     private void Awake()
     {
-        camera = GetComponentInChildren<Camera>();
+        currentCamera = GetComponentInChildren<Camera>();
     }
 
     void FixedUpdate()
@@ -48,7 +48,7 @@ public class CameraControl : MonoBehaviour
     private void Zoom()
     {
         float requiredSize = FindRequiredSize();
-        camera.orthographicSize = Mathf.SmoothDamp(camera.orthographicSize, requiredSize, ref zoomSpeed, DampTime);
+        currentCamera.orthographicSize = Mathf.SmoothDamp(currentCamera.orthographicSize, requiredSize, ref zoomSpeed, DampTime);
     }
 
     private float FindRequiredSize()
@@ -60,7 +60,7 @@ public class CameraControl : MonoBehaviour
             Vector3 targetLocalPos = transform.InverseTransformPoint(Targets[counter].position);
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;
             size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.z));
-            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / camera.aspect);
+            size = Mathf.Max(size, Mathf.Abs(desiredPosToTarget.x) / currentCamera.aspect);
         }
         size += ScreenEdgeBuffer;
         size = Mathf.Max(size, MinSize);
