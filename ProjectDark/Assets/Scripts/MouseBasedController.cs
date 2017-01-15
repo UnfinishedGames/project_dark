@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class MouseBasedController : MonoBehaviour
+public class MouseBasedController : NetworkBehaviour
 {
     public float speed = 6f;
     // The speed that the player will move at.
@@ -16,14 +17,17 @@ public class MouseBasedController : MonoBehaviour
     public Rigidbody weapon;
     public Transform weaponSlot;
 
-    void Awake()
+    public override void OnStartLocalPlayer()
     {
-        // Set up references.
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
@@ -32,6 +36,10 @@ public class MouseBasedController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         // Store the input axes.
         float h = Input.GetAxisRaw(playerAxisHorizontal);
         float v = Input.GetAxisRaw(playerAxisVertical);
