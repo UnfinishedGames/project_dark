@@ -4,7 +4,7 @@ public class StickBehaviour : MonoBehaviour
 {
     void Start()
     {
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject, 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -17,6 +17,10 @@ public class StickBehaviour : MonoBehaviour
             {
                 player.TakeDamage();
             }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
