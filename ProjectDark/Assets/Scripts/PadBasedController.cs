@@ -7,7 +7,8 @@ public class PadBasedController : MonoBehaviour
     // The speed that the player will move at.
     public string playerAxisHorizontal;
     public string playerAxisVertical;
-
+    public AudioSource stepSound;
+    
     public string lookHorizontal;
     public string lookVertical;
 
@@ -49,6 +50,18 @@ public class PadBasedController : MonoBehaviour
         //Debug.Log("Input: " + Input.GetAxis(playerAxisHorizontal).ToString());
         var newDirection = (horizontalDirection + verticalDirection);
         transform.position += newDirection * speed * Time.deltaTime;  
+        // check if we have some movement and play the assigned movement sound
+        if (newDirection.magnitude > 0.1)
+        {
+            if (!stepSound.isPlaying)
+            {
+                stepSound.Play();
+            }
+        }
+        else
+        {
+            stepSound.Stop();
+        }
     }
 
     void Turning()

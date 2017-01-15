@@ -6,6 +6,7 @@ public class MouseBasedController : MonoBehaviour
     // The speed that the player will move at.
     public string playerAxisHorizontal;
     public string playerAxisVertical;
+    public AudioSource stepSound;
 
     // The vector to store the direction of the player's movement.
     Vector3 movement;
@@ -54,6 +55,19 @@ public class MouseBasedController : MonoBehaviour
 
         // Move the player to it's current position plus the movement.
         playerRigidbody.MovePosition(transform.position + movement);
+        
+        // check if we have some movement and play the assigned movement sound
+        if (movement.magnitude > 0.1)
+        {
+            if (!stepSound.isPlaying)
+            {
+                stepSound.Play();
+            }
+        }
+        else
+        {
+            stepSound.Stop();
+        }
     }
 
     /// <summary>

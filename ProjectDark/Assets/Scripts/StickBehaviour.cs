@@ -2,9 +2,16 @@
 
 public class StickBehaviour : MonoBehaviour
 {
+    public AudioClip shootSound;
+
     void Start()
     {
         Destroy(gameObject, 0.5f);
+    }
+
+    void Awake()
+    {
+        AudioSource.PlayClipAtPoint(shootSound, transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
