@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
+using System.Collections;
 
-public class PlayerTextOverlay : NetworkBehaviour
+public class PlayerTextOverlay : MonoBehaviour
 {
     public string Onoma = "";
     public string playerAxisHorizontal;
@@ -21,10 +21,6 @@ public class PlayerTextOverlay : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!isLocalPlayer)
-        {
-            return;
-        }
         float h = Mathf.Abs(Input.GetAxisRaw(playerAxisHorizontal));
         float v = Mathf.Abs(Input.GetAxisRaw(playerAxisVertical));
         if (h + v > 0.1)
