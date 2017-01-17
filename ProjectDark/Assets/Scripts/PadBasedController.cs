@@ -8,6 +8,7 @@ public class PadBasedController : MonoBehaviour
     public string playerAxisHorizontal;
     public string playerAxisVertical;
     public AudioSource stepSound;
+    private PlayerSoundManager playerSoundManager;
     
     public string lookHorizontal;
     public string lookVertical;
@@ -24,7 +25,8 @@ public class PadBasedController : MonoBehaviour
     void Awake()
     {
         // Set up references.
-        //playerRigidbody = GetComponent<Rigidbody>(); 
+        //playerRigidbody = GetComponent<Rigidbody>();
+        this.playerSoundManager = new PlayerSoundManager(this.stepSound);
     }
 
     void Update()
@@ -51,17 +53,7 @@ public class PadBasedController : MonoBehaviour
         var newDirection = (horizontalDirection + verticalDirection);
         transform.position += newDirection * speed * Time.deltaTime;  
         // check if we have some movement and play the assigned movement sound
-        if (newDirection.magnitude > 0.1)
-        {
-            if (!stepSound.isPlaying)
-            {
-                stepSound.Play();
-            }
-        }
-        else
-        {
-            stepSound.Stop();
-        }
+        this.playerSoundManager.playMovementSound(newDirection);
     }
 
     void Turning()
