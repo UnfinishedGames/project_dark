@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Net;
 
 public class MouseBasedController : MonoBehaviour
 {
@@ -15,7 +17,7 @@ public class MouseBasedController : MonoBehaviour
     Rigidbody playerRigidbody;
 
     public int pushButton = 0;
-    public Rigidbody weapon;
+    public WeaponStash weaponStash;
     public Transform weaponSlot;
 
     void Awake()
@@ -86,11 +88,12 @@ public class MouseBasedController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(pushButton))
         {
+            //foo = GetComponent<PlayerHealth>();
             //Debug.Log("BAM");
-            Rigidbody weapon_inst;
-            weapon_inst = Instantiate(weapon, weaponSlot.position, weaponSlot.rotation) as Rigidbody;
             //weapon_inst.AddExplosionForce(3, weaponSlot.position, 3);
-            weapon_inst.AddForce(weaponSlot.forward * 1000);
+            GameObject weapon = this.weaponStash.getWeapon(AvailableWeapons.ENERGY_PULSE, this.weaponSlot);
+            Weapon foo = weapon.GetComponent<Weapon>();
+            foo.fire(this.weaponSlot.forward);
         }
     }
 }

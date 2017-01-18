@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnergyPulseBehaviour : MonoBehaviour
+public class EnergyPulseBehaviour : Weapon
 {
     public AudioClip shootSound;
     public AudioClip hitSound;
@@ -35,4 +35,9 @@ public class EnergyPulseBehaviour : MonoBehaviour
         }
     }
 
+    public override void fire(Vector3 direction)
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+        body.AddForce(direction * 1000);
+    }
 }
