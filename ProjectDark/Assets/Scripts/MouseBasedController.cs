@@ -20,11 +20,15 @@ public class MouseBasedController : MonoBehaviour
     public WeaponStash weaponStash;
     public Transform weaponSlot;
 
+    private Weapon currentWeapon;
+
     void Awake()
     {
         // Set up references.
         playerRigidbody = GetComponent<Rigidbody>();
         this.playerSoundManager = new PlayerSoundManager(this.stepSound);
+        //selectWeapon("EnergyPulse");
+        selectWeapon("Flashlight");
     }
 
     void Update()
@@ -84,16 +88,19 @@ public class MouseBasedController : MonoBehaviour
         }
     }
 
+    void selectWeapon(string weaponName)
+    {
+        GameObject weapon = this.weaponStash.getWeapon(weaponName, this.weaponSlot);
+        this.currentWeapon = weapon.GetComponent<Weapon>();
+        this.currentWeapon.select(this.weaponSlot.forward);
+    }
+
     void slashOut()
     {
         if (Input.GetMouseButtonDown(pushButton))
         {
-            //foo = GetComponent<PlayerHealth>();
             //Debug.Log("BAM");
-            //weapon_inst.AddExplosionForce(3, weaponSlot.position, 3);
-            GameObject weapon = this.weaponStash.getWeapon(AvailableWeapons.ENERGY_PULSE, this.weaponSlot);
-            Weapon foo = weapon.GetComponent<Weapon>();
-            foo.fire(this.weaponSlot.forward);
+            this.currentWeapon.fire();
         }
     }
 }

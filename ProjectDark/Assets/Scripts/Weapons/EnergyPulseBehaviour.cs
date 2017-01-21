@@ -12,7 +12,6 @@ public class EnergyPulseBehaviour : Weapon
 
     void Awake()
     {
-        AudioSource.PlayClipAtPoint(shootSound, transform.position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,9 +34,10 @@ public class EnergyPulseBehaviour : Weapon
         }
     }
 
-    public override void fire(Vector3 direction)
+    public override void fire()
     {
+        AudioSource.PlayClipAtPoint(shootSound, transform.position);
         Rigidbody body = GetComponent<Rigidbody>();
-        body.AddForce(direction * 1000);
+        body.AddForce(transform.forward * 1000);
     }
 }

@@ -1,26 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-public enum AvailableWeapons {
-    FLASHLIGHT,
-    ENERGY_PULSE
-}
+//public enum AvailableWeapons {
+//    ENERGY_PULSE = 0,
+//    FLASHLIGHT = 1
+//}
 
 public class WeaponStash : MonoBehaviour
 {
     public List<GameObject> weaponList;
 
-    public GameObject getWeapon(AvailableWeapons weapon, Transform weaponSlot)
+    public GameObject getWeapon(string weaponName, Transform weaponSlot)
     {
-        GameObject weapon_inst = null;
-        switch (weapon)
+        GameObject weapon = null;
+        foreach (GameObject item in weaponList)
         {
-        case AvailableWeapons.ENERGY_PULSE:
-            weapon_inst = Instantiate(weaponList[0], weaponSlot.position, weaponSlot.rotation) as GameObject;
-            break;
+            if (item.name.Contains(weaponName))
+            {
+                weapon = item;
+            }
         }
-        return weapon_inst;
+
+        if (weapon == null)
+        {
+            throw new TypeLoadException("Weapon " + weaponName + " not found!");
+        }
+            
+        GameObject newWeapon = Instantiate(weapon, weaponSlot.position, weaponSlot.rotation) as GameObject;
+        newWeapon.transform.parent = weaponSlot;
+        return newWeapon;
     }
 
 }
