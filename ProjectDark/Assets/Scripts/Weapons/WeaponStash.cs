@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-//public enum AvailableWeapons {
-//    ENERGY_PULSE = 0,
-//    FLASHLIGHT = 1
-//}
+public enum AvailableWeapons {
+    EnergyPulse,
+    Flashlight
+}
 
 public class WeaponStash : MonoBehaviour
 {

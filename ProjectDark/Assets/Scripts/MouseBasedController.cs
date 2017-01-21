@@ -1,60 +1,26 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using System.Net;
+using System.ComponentModel;
 
-public class MouseBasedController : MonoBehaviour
+public class MouseBasedController : PlayerController
 {
-    public float speed = 6f;
-    // The speed that the player will move at.
-    public string playerAxisHorizontal;
-    public string playerAxisVertical;
-    public AudioSource stepSound;
-    private PlayerSoundManager playerSoundManager;
-
     // The vector to store the direction of the player's movement.
     Vector3 movement;
     // Reference to the player's rigidbody.
     Rigidbody playerRigidbody;
-
     public int pushButton = 0;
-    public WeaponStash weaponStash;
-    public Transform weaponSlot;
 
-    private Weapon currentWeapon;
 
-    void Awake()
+    protected override void Awake()
     {
-        // Set up references.
+        base.Awake();
         playerRigidbody = GetComponent<Rigidbody>();
-        this.playerSoundManager = new PlayerSoundManager(this.stepSound);
-        //selectWeapon("EnergyPulse");
-        selectWeapon("Flashlight");
     }
 
-    void Update()
+    protected override void Move()
     {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        // Store the input axes.
         float h = Input.GetAxisRaw(playerAxisHorizontal);
         float v = Input.GetAxisRaw(playerAxisVertical);
-
-        // Move the player around the scene.
-        Move(h, v);
-
-        // Turn the player to face the mouse cursor.
-        Turning();
-        slashOut();
-    }
-
-    void Move(float h, float v)
-    {
         // Set the movement vector based on the axis input.
         movement.Set(h, 0f, v);
 
@@ -70,7 +36,7 @@ public class MouseBasedController : MonoBehaviour
     /// <summary>
     /// We turn the player object so that it will face the mouse pointer.
     /// </summary>
-    void Turning()
+    protected override void Turning()
     {
         // TODO: We might want to catch the mouse in a circle, so the plyer object will not change its looking direction when it is moving.
         var playerPlane = new Plane(Vector3.up, transform.position);
@@ -88,19 +54,11 @@ public class MouseBasedController : MonoBehaviour
         }
     }
 
-    void selectWeapon(string weaponName)
-    {
-        GameObject weapon = this.weaponStash.getWeapon(weaponName, this.weaponSlot);
-        this.currentWeapon = weapon.GetComponent<Weapon>();
-        this.currentWeapon.select();
-    }
-
-    void slashOut()
+    protected override void checkFireWeapon()
     {
         if (Input.GetMouseButtonDown(pushButton))
         {
-            //Debug.Log("BAM");
-            this.currentWeapon.fire();
+            fireWeapon();
         }
     }
 }
