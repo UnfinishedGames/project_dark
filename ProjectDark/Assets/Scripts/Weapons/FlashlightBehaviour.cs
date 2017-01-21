@@ -8,6 +8,7 @@ public class FlashlightBehaviour : Weapon
 
     void Start()
     {
+        weaponType = AvailableWeapons.Flashlight;
     }
 
     void Awake()

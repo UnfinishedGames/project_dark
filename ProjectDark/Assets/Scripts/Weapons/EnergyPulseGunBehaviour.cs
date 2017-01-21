@@ -9,11 +9,11 @@ public class EnergyPulseGunBehaviour : Weapon
 
     void Start()
     {
+        weaponType = AvailableWeapons.EnergyPulse;
     }
 
     void Awake()
     {
-        //AudioSource.PlayClipAtPoint(selectSound, transform.position);
     }
 
     public override void fire()

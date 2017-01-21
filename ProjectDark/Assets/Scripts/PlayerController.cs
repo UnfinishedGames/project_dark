@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Transform weaponSlot;
     public WeaponStash weaponStash;
     public AvailableWeapons startWeapon;
+    public string switchWeaponButton;
 
     protected GameObject weapon;
     protected PlayerSoundManager playerSoundManager;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        checkWeaponSwitch();
+
         if (Input.GetKey(KeyCode.Escape))
         {
             Application.Quit();
@@ -51,6 +54,11 @@ public class PlayerController : MonoBehaviour
     {
     }
 
+    protected virtual void checkWeaponSwitch()
+    {
+
+    }
+
     protected void fireWeapon()
     {
         this.currentWeapon.fire();
@@ -63,4 +71,19 @@ public class PlayerController : MonoBehaviour
         this.currentWeapon.select();
     }
 
+    protected void switchWeapon()
+    {
+        AvailableWeapons newWeapon = AvailableWeapons.EnergyPulse;
+        switch (currentWeapon.weaponType)
+        {
+        case AvailableWeapons.EnergyPulse:
+            newWeapon = AvailableWeapons.Flashlight;
+            break;
+        case AvailableWeapons.Flashlight:
+            newWeapon = AvailableWeapons.EnergyPulse;
+            break;
+        }
+        Destroy(currentWeapon.gameObject);
+        selectWeapon(newWeapon.ToString());
+    }
 }

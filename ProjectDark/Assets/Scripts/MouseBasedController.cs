@@ -61,5 +61,13 @@ public class MouseBasedController : PlayerController
             fireWeapon();
         }
     }
+
+    protected override void checkWeaponSwitch()
+    {
+        if (Input.GetButtonDown(switchWeaponButton))
+        {
+            switchWeapon();
+        }
+    }
 }
 
