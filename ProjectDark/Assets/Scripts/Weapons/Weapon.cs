@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
         
     }
 
-    public virtual void select(Vector3 direction)
+    public virtual void select()
     {
         
     }

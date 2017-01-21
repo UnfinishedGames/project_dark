@@ -92,7 +92,7 @@ public class MouseBasedController : MonoBehaviour
     {
         GameObject weapon = this.weaponStash.getWeapon(weaponName, this.weaponSlot);
         this.currentWeapon = weapon.GetComponent<Weapon>();
-        this.currentWeapon.select(this.weaponSlot.forward);
+        this.currentWeapon.select();
     }
 
     void slashOut()

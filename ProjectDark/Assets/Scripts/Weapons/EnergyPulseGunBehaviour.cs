@@ -23,7 +23,7 @@ public class EnergyPulseGunBehaviour : Weapon
         bullet.GetComponent<Weapon>().fire();
     }
 
-    public override void select(Vector3 direction)
+    public override void select()
     {
 
     }
