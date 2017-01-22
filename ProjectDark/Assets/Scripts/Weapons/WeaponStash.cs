@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System;
 
 public enum AvailableWeapons {
-    EnergyPulse,
-    Flashlight
+    EnergyPulseGun,
+    Flashlight,
+    LaserGun
 }
 
-public class WeaponStash : MonoBehaviour
-{
+public class WeaponStash : MonoBehaviour {
     public List<GameObject> weaponList;
 
     public GameObject getWeapon(string weaponName, Transform weaponSlot)

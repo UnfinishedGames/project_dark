@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Turning();
-        checkFireWeapon();
+        checkFireWeapon(currentWeapon.continuesFiring);
     }
 
     protected virtual void Move()
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    protected virtual void checkFireWeapon()
+    protected virtual void checkFireWeapon(bool continuesFiring)
     {
     }
 
@@ -73,14 +73,17 @@ public class PlayerController : MonoBehaviour
 
     protected void switchWeapon()
     {
-        AvailableWeapons newWeapon = AvailableWeapons.EnergyPulse;
+        AvailableWeapons newWeapon = AvailableWeapons.EnergyPulseGun;
         switch (currentWeapon.weaponType)
         {
-        case AvailableWeapons.EnergyPulse:
+        case AvailableWeapons.EnergyPulseGun:
             newWeapon = AvailableWeapons.Flashlight;
             break;
         case AvailableWeapons.Flashlight:
-            newWeapon = AvailableWeapons.EnergyPulse;
+            newWeapon = AvailableWeapons.LaserGun;
+            break;
+        case AvailableWeapons.LaserGun:
+            newWeapon = AvailableWeapons.EnergyPulseGun;
             break;
         }
         Destroy(currentWeapon.gameObject);

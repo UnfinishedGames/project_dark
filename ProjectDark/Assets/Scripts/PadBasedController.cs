@@ -29,11 +29,21 @@ public class PadBasedController : PlayerController
         }
     }
 
-    protected override void checkFireWeapon()
+    protected override void checkFireWeapon(bool continuesFiring)
     {
-        if (Input.GetButtonDown(pushButton))
+        if (continuesFiring)
         {
-            fireWeapon();
+            if (Input.GetButton(pushButton))
+            {
+                fireWeapon();
+            }
+        }
+        else
+        {
+            if (Input.GetButtonDown(pushButton))
+            {
+                fireWeapon();
+            }
         }
     }
 

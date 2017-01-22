@@ -54,11 +54,21 @@ public class MouseBasedController : PlayerController
         }
     }
 
-    protected override void checkFireWeapon()
+    protected override void checkFireWeapon(bool continuesFiring)
     {
-        if (Input.GetMouseButtonDown(pushButton))
+        if (continuesFiring)
         {
-            fireWeapon();
+            if (Input.GetMouseButton(pushButton))
+            {
+                fireWeapon();
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButtonDown(pushButton))
+            {
+                fireWeapon();
+            }
         }
     }
 
