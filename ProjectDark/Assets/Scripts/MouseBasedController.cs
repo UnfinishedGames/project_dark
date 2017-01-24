@@ -62,6 +62,10 @@ public class MouseBasedController : PlayerController
             {
                 fireWeapon();
             }
+            if (Input.GetMouseButtonUp(pushButton))
+            {
+                fireWeapon(false);
+            }
         }
         else
         {
