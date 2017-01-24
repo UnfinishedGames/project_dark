@@ -59,9 +59,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    protected void fireWeapon()
+    protected void fireWeapon(bool startFiring = true)
     {
-        this.currentWeapon.fire();
+        if (startFiring)
+        {
+            this.currentWeapon.fire();
+        }
+        else
+        {
+            this.currentWeapon.stop();
+        }
     }
 
     protected void selectWeapon(string weaponName)

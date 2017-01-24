@@ -37,6 +37,10 @@ public class PadBasedController : PlayerController
             {
                 fireWeapon();
             }
+            if (Input.GetButtonUp(pushButton))
+            {
+                fireWeapon(false);
+            }
         }
         else
         {

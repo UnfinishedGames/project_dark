@@ -8,7 +8,12 @@ public class Weapon : MonoBehaviour
 
     public virtual void fire()
     {
-        
+
+    }
+
+    public virtual void stop()
+    {
+
     }
 
     public virtual void select()

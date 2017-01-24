@@ -9,6 +9,7 @@ public class LaserGunBehaviour : Weapon
 
     private float hitsPerSecond = 1.0f;
     private float timeSinceLastDamage = 0.0f;
+    private LineRenderer laserLine = null;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class LaserGunBehaviour : Weapon
         RaycastHit rayCastHit;
         if (Physics.Raycast(transform.position, transform.forward, out rayCastHit))
         {
+            drawLaserLine(transform.position, rayCastHit.point);
             //Quaternion.FromToRotation(Vector3.up, rayCast.normal);
             PlayerHealth player = rayCastHit.collider.GetComponent<PlayerHealth>();
             if (player != null)
@@ -38,6 +40,27 @@ public class LaserGunBehaviour : Weapon
                     //AudioSource.PlayClipAtPoint(hitSound, transform.position, 10.0f);
                 }
             }
+        }
+    }
+
+    private void drawLaserLine(Vector3 startPosition, Vector3 endPosition)
+    {
+        if (this.laserLine == null)
+        {
+            GameObject line = Instantiate(ammunition) as GameObject;
+            this.laserLine = line.GetComponent<LineRenderer>();
+        }
+        this.laserLine.enabled = true;
+
+        Vector3[] points = new Vector3[2]{ startPosition, endPosition };
+        laserLine.SetPositions(points);
+    }
+
+    public override void stop()
+    {
+        if (this.laserLine)
+        {
+            this.laserLine.enabled = false;
         }
     }
 
