@@ -23,6 +23,11 @@ public class LaserGunBehaviour : Weapon
     {
     }
 
+    void OnDestroy()
+    {
+        stop();
+    }
+
     public override void fire()
     {
         RaycastHit rayCastHit;
