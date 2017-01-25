@@ -12,6 +12,8 @@ public class LaserGunBehaviour : Weapon
     private LineRenderer laserLine = null;
     private GameObject sourceLight = null;
     private GameObject hitLight = null;
+    // needed only to destroy the line properly when the weapon is destroyed
+    private GameObject lineObject = null;
 
     void Start()
     {
@@ -25,7 +27,7 @@ public class LaserGunBehaviour : Weapon
 
     void OnDestroy()
     {
-        stop();
+        Destroy(lineObject);
     }
 
     public override void fire()
@@ -55,8 +57,8 @@ public class LaserGunBehaviour : Weapon
     {
         if (this.laserLine == null)
         {
-            GameObject line = Instantiate(ammunition) as GameObject;
-            this.laserLine = line.GetComponent<LineRenderer>();
+            this.lineObject = Instantiate(ammunition) as GameObject;
+            this.laserLine = lineObject.GetComponent<LineRenderer>();
         }
         this.laserLine.enabled = true;
 
