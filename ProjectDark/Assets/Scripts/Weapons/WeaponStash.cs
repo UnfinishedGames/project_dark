@@ -9,15 +9,16 @@ public enum AvailableWeapons {
     LaserGun
 }
 
-public class WeaponStash : MonoBehaviour {
+public class WeaponStash : MonoBehaviour
+{
     public List<GameObject> weaponList;
 
-    public GameObject getWeapon(string weaponName, Transform weaponSlot)
+    public GameObject getWeapon(AvailableWeapons weaponToFetch, Transform weaponSlot)
     {
         GameObject weapon = null;
         foreach (GameObject item in weaponList)
         {
-            if (item.name.Contains(weaponName))
+            if (item.name.Contains(weaponToFetch.ToString()))
             {
                 weapon = item;
             }
@@ -25,7 +26,7 @@ public class WeaponStash : MonoBehaviour {
 
         if (weapon == null)
         {
-            throw new TypeLoadException("Weapon " + weaponName + " not found!");
+            throw new TypeLoadException("Weapon " + weaponToFetch.ToString() + " not found!");
         }
             
         GameObject newWeapon = Instantiate(weapon, weaponSlot.position, weaponSlot.rotation) as GameObject;

@@ -71,9 +71,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    protected void selectWeapon(string weaponName)
+    protected void selectWeapon(AvailableWeapons weaponToSelect)
     {
-        GameObject weapon = this.weaponStash.getWeapon(weaponName, this.weaponSlot);
+        GameObject weapon = this.weaponStash.getWeapon(weaponToSelect, this.weaponSlot);
         this.currentWeapon = weapon.GetComponent<Weapon>();
         this.currentWeapon.select();
     }
@@ -94,6 +94,6 @@ public class PlayerController : MonoBehaviour
             break;
         }
         Destroy(currentWeapon.gameObject);
-        selectWeapon(newWeapon.ToString());
+        selectWeapon(newWeapon);
     }
 }
