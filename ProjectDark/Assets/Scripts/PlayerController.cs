@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     protected virtual void Awake()
     {
         this.playerSoundManager = new PlayerSoundManager(this.stepSound);
-        selectWeapon(startWeapon.ToString());
+        selectWeapon(startWeapon);
     }
 
     private void Update()
