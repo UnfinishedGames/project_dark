@@ -7,9 +7,9 @@ public class CameraControl : MonoBehaviour
     public float DampTime = 0.2f;
     public float ScreenEdgeBuffer = 4f;
     public float MinSize = 6.5f;
-    public Transform[] Targets;
 
-    private Camera currentCamera;
+    private Transform[] Targets = new Transform[2];
+        private Camera currentCamera;
     private float zoomSpeed;
     private Vector3 moveVelocity;
     private Vector3 desiredPosition;
@@ -20,9 +20,9 @@ public class CameraControl : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-        Move();
-        Zoom();
+    { 
+        //Move();
+        //Zoom();
     }
 
     private void Move()

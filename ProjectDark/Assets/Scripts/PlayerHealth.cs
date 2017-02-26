@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = startingHealth;
         UpdateHealthBar();
-        transform.position = playerSpawn.transform.position;
+        //transform.position = playerSpawn.transform.position;
     }
 
     public void TakeDamage()
@@ -29,6 +29,6 @@ public class PlayerHealth : MonoBehaviour
      
     private void UpdateHealthBar()
     {
-        healthBar.value = currentHealth;
+        //healthBar.value = currentHealth;
     }
 }
