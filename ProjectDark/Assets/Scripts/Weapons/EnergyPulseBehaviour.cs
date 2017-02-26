@@ -37,7 +37,5 @@ public class EnergyPulseBehaviour : Weapon
     public override void fire()
     {
         AudioSource.PlayClipAtPoint(shootSound, transform.position);
-        Rigidbody body = GetComponent<Rigidbody>();
-        body.AddForce(transform.forward * 1000);
     }
 }

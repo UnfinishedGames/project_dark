@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class EnergyPulseGunBehaviour : Weapon
 {
@@ -19,6 +20,8 @@ public class EnergyPulseGunBehaviour : Weapon
     {
         Transform transform = GetComponent<Transform>();
         GameObject bullet = Instantiate(ammunition, transform.position, transform.rotation) as GameObject;
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 2;
+        NetworkServer.Spawn(bullet);
         bullet.GetComponent<Weapon>().fire();
     }
 

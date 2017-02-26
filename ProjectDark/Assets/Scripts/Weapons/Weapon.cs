@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Weapon : MonoBehaviour
+public class Weapon : NetworkBehaviour
 {
     public AvailableWeapons weaponType;
     public bool continuesFiring = false;

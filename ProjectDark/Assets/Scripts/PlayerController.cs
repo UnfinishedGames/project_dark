@@ -70,7 +70,8 @@ public class PlayerController : NetworkBehaviour
 
     }
 
-    protected void fireWeapon(bool startFiring = true)
+    [Command]
+    protected void CmdFireWeapon(bool startFiring)
     {
         if (startFiring)
         {

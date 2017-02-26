@@ -35,18 +35,18 @@ public class PadBasedController : PlayerController
         {
             if (Input.GetButton(pushButton))
             {
-                fireWeapon();
+                CmdFireWeapon(true);
             }
             if (Input.GetButtonUp(pushButton))
             {
-                fireWeapon(false);
+                CmdFireWeapon(false);
             }
         }
         else
         {
             if (Input.GetButtonDown(pushButton))
             {
-                fireWeapon();
+                CmdFireWeapon(true);
             }
         }
     }
