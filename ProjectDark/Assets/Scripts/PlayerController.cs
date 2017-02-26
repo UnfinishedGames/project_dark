@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float speed = 6f;
     // The speed that the player will move at.
@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
         selectWeapon(startWeapon);
     }
 
+    public override void OnStartLocalPlayer()
+    {
+        var mainMesh = GetComponentInChildren<MeshRenderer>();
+        mainMesh.material.color = Color.blue;
+    }
+
     private void Update()
     {
         checkWeaponSwitch();
@@ -35,6 +41,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
         Move();
         Turning();
         checkFireWeapon(currentWeapon.continuesFiring);
