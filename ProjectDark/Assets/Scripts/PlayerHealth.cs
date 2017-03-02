@@ -29,6 +29,6 @@ public class PlayerHealth : MonoBehaviour
      
     private void UpdateHealthBar()
     {
-        //healthBar.value = currentHealth;
+        healthBar.value = currentHealth;
     }
 }
