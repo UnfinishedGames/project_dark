@@ -25,6 +25,12 @@ public class NetworkInitializations : MonoBehaviour {
             var healthbarSlider2 = GameObject.FindGameObjectWithTag("Healthbar2").GetComponent<UnityEngine.UI.Slider>();
             var healthScript2 = players[1].GetComponent<PlayerHealth>();
             healthScript2.healthBar = healthbarSlider2;
+
+            var winCounter = GameObject.FindGameObjectWithTag("WinCounter").GetComponent<CountWins>();
+            winCounter.player1 = players[0];
+            winCounter.player2 = players[1];
+            healthScript1.counter = winCounter;
+            healthScript2.counter = winCounter;
         }
 	}
 }

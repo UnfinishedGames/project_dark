@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthBar();
         if(currentHealth <= 0)
         {
-            counter.IAmDead(myName);
+            //counter.IAmDead(myName);
         }
     }
      
