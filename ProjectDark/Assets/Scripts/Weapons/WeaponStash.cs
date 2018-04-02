@@ -6,7 +6,8 @@ using System;
 public enum AvailableWeapons {
     EnergyPulseGun,
     Flashlight,
-    LaserGun
+    LaserGun,
+    Stick
 }
 
 public class WeaponStash : MonoBehaviour

@@ -90,6 +90,9 @@ public class PlayerController : MonoBehaviour
             newWeapon = AvailableWeapons.LaserGun;
             break;
         case AvailableWeapons.LaserGun:
+            newWeapon = AvailableWeapons.Stick;
+            break;
+        case AvailableWeapons.Stick:
             newWeapon = AvailableWeapons.EnergyPulseGun;
             break;
         }
